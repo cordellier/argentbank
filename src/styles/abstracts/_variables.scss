@@ -1,0 +1,26 @@
+// _variables.scss
+
+$color-primary: #00bc77;
+$color-secondary: #12002b;
+$color-text: #2c3e50;
+$color-background: #ffffff;
+$color-border: #cccccc;
+
+$font-family-base: Avenir, Helvetica, Arial, sans-serif;
+$font-size-base: 16px;
+$font-size-large: 1.25rem;
+$font-size-small: 0.875rem;
+
+$spacing-small: 0.5rem;
+$spacing-medium: 1rem;
+$spacing-large: 2rem;
+
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 1024px;
+
+$z-index-header: 1000;
+$z-index-modal: 2000;
+
+$transition-speed: 0.3s;
+$transition-easing: ease-in-out;

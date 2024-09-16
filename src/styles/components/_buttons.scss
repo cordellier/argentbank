@@ -1,0 +1,18 @@
+// _buttons.scss
+
+.btn {
+    @include button-style($color-primary, $color-background);
+    font-size: $font-size-base;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    
+    &--secondary {
+      @include button-style($color-secondary, $color-background);
+    }
+    
+    &--large {
+      padding: $spacing-medium $spacing-large;
+      font-size: $font-size-large;
+    }
+  }

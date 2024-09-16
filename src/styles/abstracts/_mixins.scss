@@ -1,0 +1,31 @@
+// _mixins.scss
+
+@mixin flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @mixin button-style($bg-color, $text-color) {
+    background-color: $bg-color;
+    color: $text-color;
+    padding: $spacing-small $spacing-medium;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color $transition-speed $transition-easing;
+  
+    &:hover {
+      background-color: darken($bg-color, 10%);
+    }
+  }
+  
+  @mixin responsive($breakpoint) {
+    @if $breakpoint == mobile {
+      @media (max-width: $breakpoint-mobile) { @content; }
+    } @else if $breakpoint == tablet {
+      @media (min-width: $breakpoint-mobile + 1) and (max-width: $breakpoint-tablet) { @content; }
+    } @else if $breakpoint == desktop {
+      @media (min-width: $breakpoint-tablet + 1) { @content; }
+    }
+  }

@@ -1,0 +1,55 @@
+// Header.scss
+
+.main-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $spacing-medium;
+  background-color: $color-background;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    &-image {
+      max-width: 100%;
+      width: 200px;
+    }
+  }
+
+  &__items {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item {
+    margin-left: $spacing-medium;
+    text-decoration: none;
+    color: $color-text;
+    font-weight: bold;
+    transition: color $transition-speed $transition-easing;
+
+    &:hover {
+      color: $color-primary;
+    }
+
+    &--button {
+      @include button-style($color-primary, $color-background);
+    }
+  }
+
+  @include responsive(mobile) {
+    flex-direction: column;
+
+    &__items {
+      margin-top: $spacing-medium;
+    }
+
+    &__item {
+      margin-left: 0;
+      margin-top: $spacing-small;
+    }
+  }
+}

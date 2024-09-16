@@ -1,0 +1,29 @@
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.mt-1 { margin-top: $spacing-small; }
+.mt-2 { margin-top: $spacing-medium; }
+.mt-3 { margin-top: $spacing-large; }
+
+.mb-1 { margin-bottom: $spacing-small; }
+.mb-2 { margin-bottom: $spacing-medium; }
+.mb-3 { margin-bottom: $spacing-large; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}

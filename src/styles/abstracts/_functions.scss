@@ -1,0 +1,10 @@
+// _functions.scss
+
+@function strip-unit($value) {
+    @return $value / ($value * 0 + 1);
+  }
+  
+  @function rem($pxValue) {
+    @return #{strip-unit($pxValue) / strip-unit($font-size-base)}rem;
+  }
+  
