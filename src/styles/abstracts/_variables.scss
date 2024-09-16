@@ -24,3 +24,9 @@ $z-index-modal: 2000;
 
 $transition-speed: 0.3s;
 $transition-easing: ease-in-out;
+
+$breakpoints: (
+  'small': 480px,
+  'medium': 768px,
+  'large': 1024px
+);
