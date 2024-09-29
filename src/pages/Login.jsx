@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { loginSuccess, loginFail } from '../store/authSlice';
-import { login } from '../services/api';
+import { login } from '../store/actions/authActions'; 
 import { isValidEmail, isValidPassword } from '../utils/regex';
+import { fetchUserProfile } from '../store/actions/userActions';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -27,11 +27,10 @@ const Login = () => {
     }
 
     try {
-      const data = await login(email, password);
-      dispatch(loginSuccess(data.token));
+      await dispatch(login(email, password));
+      await dispatch(fetchUserProfile());
       navigate('/profile');
     } catch (err) {
-      dispatch(loginFail(err.response?.data?.message || 'Login failed'));
       setError('Invalid email or password');
     }
   };

@@ -1,71 +1,68 @@
-// Profile.jsx
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setUserProfile, updateUsername } from '../store/userSlice';
-import { getUserProfile, updateUserProfile } from '../services/api';
+import { fetchUserProfile, updateUser } from '../store/actions/userActions';
+import { useNavigate } from 'react-router-dom';
 import AccountCardData from '../data/AccountCardData.json';
 
 const Profile = () => {
   const dispatch = useDispatch();
-  const { token } = useSelector((state) => state.auth);
-  const { profile } = useSelector((state) => state.user);
+  const navigate = useNavigate();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { profile, isLoading, error } = useSelector((state) => state.user);
   const [isEditing, setIsEditing] = useState(false);
-  const [newUsername, setNewUsername] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
 
   useEffect(() => {
-    const fetchUserProfile = async () => {
-      try {
-        const data = await getUserProfile(token);
-        dispatch(setUserProfile(data.body));
-      } catch (error) {
-        console.error('Failed to fetch user profile:', error);
-      }
-    };
-
-    if (token && !profile) {
-      fetchUserProfile();
+    if (isAuthenticated && !profile) {
+      dispatch(fetchUserProfile());
     }
-  }, [token, profile, dispatch]);
+  }, [isAuthenticated, profile, dispatch]);
+
+  useEffect(() => {
+    if (profile) {
+      setFirstName(profile.firstName);
+      setLastName(profile.lastName);
+    }
+  }, [profile]);
 
   const handleEdit = () => {
     setIsEditing(true);
-    setNewUsername(profile.userName);
   };
 
   const handleSave = async () => {
     try {
-      await updateUserProfile(token, newUsername);
-      dispatch(updateUsername(newUsername));
+      await dispatch(updateUser({ firstName, lastName }));
       setIsEditing(false);
     } catch (error) {
-      console.error('Failed to update username:', error);
+      console.error('Failed to update name:', error);
     }
   };
 
-  if (!profile) {
-    return <div>Loading...</div>;
-  }
+  if (!profile) return null;
 
   return (
     <main className="main bg-dark">
       <div className="header">
         <h1>Welcome back<br />{profile.firstName} {profile.lastName}!</h1>
         {isEditing ? (
-          <div>
-            <input
-              type="text"
-              value={newUsername}
-              onChange={(e) => setNewUsername(e.target.value)}
-            />
-            <button onClick={handleSave} className="edit-button">Save</button>
-            <button onClick={() => setIsEditing(false)} className="edit-button">Cancel</button>
+          <div className="edit-inputs">
+            <div className="input-wrapper">
+              <input type="text" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="Tony" />
+              <input type="text" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Jarvis" />
+            </div>
+            <div className="button-wrapper">
+              <button className="edit-button" onClick={handleSave}>Save</button>
+              <button className="edit-button" onClick={() => setIsEditing(false)}>Cancel</button>
+            </div>
           </div>
         ) : (
-          <button onClick={handleEdit} className="edit-button">Edit Name</button>
+          <button className="edit-button" onClick={handleEdit}>Edit Name</button>
         )}
       </div>
+
       <h2 className="sr-only">Accounts</h2>
+
       {AccountCardData.map((account) => (
         <section className="account" key={account.id}>
           <div className="account-content-wrapper">
@@ -74,7 +71,7 @@ const Profile = () => {
             <p className="account-amount-description">{account.description}</p>
           </div>
           <div className="account-content-wrapper cta">
-            <button className="transaction-button">View transactions</button>
+            <button className="transaction-button" onClick={() => navigate(`/transactions/${account.id}`)}>View transactions</button>
           </div>
         </section>
       ))}
