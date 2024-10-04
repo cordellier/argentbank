@@ -2,13 +2,15 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginSuccess, loginFail } from '../store/authSlice';
-import { login } from '../services/api';
+import { setUserProfile } from '../store/userSlice';
+import { login, getUserProfile } from '../services/api';
 import { isValidEmail, isValidPassword } from '../utils/regex';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -27,8 +29,18 @@ const Login = () => {
     }
 
     try {
-      const data = await login(email, password);
-      dispatch(loginSuccess(data.token));
+      const loginData = await login(email, password);
+      dispatch(loginSuccess(loginData.body.token));
+
+      // Fetch user profile immediately after successful login
+      const profileData = await getUserProfile(loginData.body.token);
+      dispatch(setUserProfile(profileData.body));
+
+      // If "Remember me" is checked, you could save the token in localStorage here
+      if (rememberMe) {
+        localStorage.setItem('token', loginData.body.token);
+      }
+
       navigate('/profile');
     } catch (err) {
       dispatch(loginFail(err.response?.data?.message || 'Login failed'));
@@ -62,7 +74,12 @@ const Login = () => {
             />
           </div>
           <div className="input-remember">
-            <input type="checkbox" id="remember-me" />
+            <input
+              type="checkbox"
+              id="remember-me"
+              checked={rememberMe}
+              onChange={(e) => setRememberMe(e.target.checked)}
+            />
             <label htmlFor="remember-me">Remember me</label>
           </div>
           <button type="submit" className="sign-in-button">Sign In</button>

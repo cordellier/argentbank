@@ -25,14 +25,9 @@
   }
 
   &__item {
-    margin-left: $spacing-medium;
-    text-decoration: none;
-    color: $color-text;
-    font-weight: bold;
-    transition: color $transition-speed $transition-easing;
 
     &:hover {
-      color: $color-primary;
+      color: white;
     }
 
     &--button {

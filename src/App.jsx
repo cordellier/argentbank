@@ -7,6 +7,8 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Profile from './pages/Profil';
 import './styles/main.scss';
+import Transaction from './pages/Transaction';
+
 
 function App() {
   return (
@@ -18,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/transactions/:id" element={<Transaction />} />
           </Routes>
           <Footer />
         </div>

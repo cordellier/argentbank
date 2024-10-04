@@ -9,15 +9,30 @@ const userSlice = createSlice({
   initialState,
   reducers: {
     setUserProfile: (state, action) => {
-      state.profile = action.payload;
+      return {
+        ...state,
+        profile: action.payload,
+      };
     },
     updateUsername: (state, action) => {
       if (state.profile) {
-        state.profile.userName = action.payload;
+        return {
+          ...state,
+          profile: {
+            ...state.profile,
+            firstName: action.payload.firstName,
+            lastName: action.payload.lastName,
+          },
+        };
       }
+      return state;
+    },
+    clearUserProfile: () => {
+      return { ...initialState };
     },
   },
 });
 
-export const { setUserProfile, updateUsername } = userSlice.actions;
+export const { setUserProfile, updateUsername, clearUserProfile } =
+  userSlice.actions;
 export default userSlice.reducer;

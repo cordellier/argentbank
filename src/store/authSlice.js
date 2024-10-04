@@ -11,19 +11,23 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
-      state.token = action.payload;
-      state.isAuthenticated = true;
-      state.error = null;
+      return {
+        ...state,
+        token: action.payload,
+        isAuthenticated: true,
+        error: null,
+      };
     },
     loginFail: (state, action) => {
-      state.token = null;
-      state.isAuthenticated = false;
-      state.error = action.payload;
+      return {
+        ...state,
+        token: null,
+        isAuthenticated: false,
+        error: action.payload,
+      };
     },
-    logout: (state) => {
-      state.token = null;
-      state.isAuthenticated = false;
-      state.error = null;
+    logout: () => {
+      return { ...initialState };
     },
   },
 });

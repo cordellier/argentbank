@@ -1,5 +1,59 @@
 // Profile.scss
 
+.main {
+  flex: 1;
+  padding: 2rem;
+}
+
+.bg-dark {
+  background-color: #E0E7ED;
+}
+
+.header {
+  color: #fff;
+  margin-bottom: 2rem;
+  justify-content: center;
+  text-align: center;
+}
+
+.edit-button {
+  border-color: #00bc77;
+  background-color: #00bc77;
+  color: #fff;
+  font-weight: bold;
+  padding: 10px;
+  width: 100px;
+  margin-top: 1rem;
+}
+
+.edit-name-content {
+  margin-top: 1rem;
+  
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.edit-name-inputs {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+
+  input {
+    width: 200px;
+    padding: 0.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+.edit-name-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .account {
   display: flex;
   justify-content: space-between;
@@ -14,7 +68,7 @@
   text-align: left;
   margin-bottom: 2rem;
 
-  @include responsive(desktop) {
+  @media (min-width: 720px) {
     flex-direction: row;
   }
 
@@ -40,7 +94,7 @@
     flex: 1;
 
     &.cta {
-      @include responsive(desktop) {
+      @media (min-width: 720px) {
         flex: 0;
       }
     }
@@ -54,24 +108,23 @@
   font-size: 1.1rem;
   font-weight: bold;
   margin-top: 1rem;
-  border-color: $color-primary;
-  background-color: $color-primary;
+  border-color: #00bc77;
+  background-color: #00bc77;
   color: #fff;
 
-  @include responsive(desktop) {
+  @media (min-width: 720px) {
     width: 200px;
   }
 }
 
-.header {
-  color: #fff;
-  margin-bottom: 2rem;
-}
-
-.edit-button {
-  border-color: $color-primary;
-  background-color: $color-primary;
-  color: #fff;
-  font-weight: bold;
-  padding: 10px;
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

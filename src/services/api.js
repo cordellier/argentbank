@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:3001/api/v2";
+const API_URL = "http://localhost:3001/api/v1";
 
 const api = axios.create({
   baseURL: API_URL,
@@ -19,16 +19,21 @@ export const getUserProfile = async (token) => {
       headers: { Authorization: `Bearer ${token}` },
     }
   );
+  console.log("API response:", JSON.stringify(response.data, null, 2));
   return response.data;
 };
 
-export const updateUserProfile = async (token, userName) => {
+export const updateUserProfile = async (token, firstName, lastName) => {
   const response = await api.put(
     "/user/profile",
-    { userName },
+    { firstName, lastName },
     {
       headers: { Authorization: `Bearer ${token}` },
     }
+  );
+  console.log(
+    "Update profile response:",
+    JSON.stringify(response.data, null, 2)
   );
   return response.data;
 };
