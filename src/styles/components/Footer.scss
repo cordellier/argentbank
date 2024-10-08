@@ -1,12 +1,12 @@
-// Footer.scss
-
+// components/_Footer.scss
 .footer {
-  background-color: $color-secondary;
-  color: $color-background;
-  padding: $spacing-medium;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  border-top: 2px solid #ccc;
+  padding: 2rem 0 1.5rem;
 
-  &__text {
+  &-text {
     margin: 0;
+    padding: 0;
   }
 }

@@ -1,18 +1,22 @@
-// _buttons.scss
+// components/_buttons.scss
+.sign-in-button, .edit-button, .transaction-button {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-top: 1rem;
+  border-color: $primary-color;
+  background-color: $primary-color;
+  color: #fff;
+}
 
-.btn {
-    @include button-style($color-primary, $color-background);
-    font-size: $font-size-base;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    
-    &--secondary {
-      @include button-style($color-secondary, $color-background);
-    }
-    
-    &--large {
-      padding: $spacing-medium $spacing-large;
-      font-size: $font-size-large;
-    }
+.edit-button {
+  padding: 10px;
+}
+
+@media (min-width: 720px) {
+  .transaction-button {
+    width: 200px;
   }
+}

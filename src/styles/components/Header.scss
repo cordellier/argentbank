@@ -1,50 +1,47 @@
-// Header.scss
-
+// components/_Header.scss
 .main-nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: $spacing-medium;
-  background-color: $color-background;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 5px 20px;
 
-  &__logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
+  a {
+    font-weight: bold;
+    color: #2c3e50;
 
-    &-image {
-      max-width: 100%;
-      width: 200px;
+    &.router-link-exact-active {
+      color: #42b983;
     }
   }
+}
 
-  &__items {
-    display: flex;
-    align-items: center;
+.main-nav-item {
+  text-decoration: none;
+  margin-right: 0.5rem;
+
+  svg {
+    margin-right: 5px;
   }
 
-  &__item {
-
-    &:hover {
-      color: white;
-    }
-
-    &--button {
-      @include button-style($color-primary, $color-background);
-    }
+  &:hover {
+    text-decoration: underline;
   }
+}
 
-  @include responsive(mobile) {
-    flex-direction: column;
+.main-nav-button {
+  border: none;
+  background: none;
+  color: #2c3e50;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-    &__items {
-      margin-top: $spacing-medium;
-    }
+.main-nav-logo {
+  display: flex;
+  align-items: center;
 
-    &__item {
-      margin-left: 0;
-      margin-top: $spacing-small;
-    }
+  &-image {
+    max-width: 100%;
+    width: 200px;
   }
 }

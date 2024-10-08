@@ -1,11 +1,4 @@
-// _grid.scss
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: $spacing-medium;
-  
-    @include responsive(mobile) {
-      grid-template-columns: 1fr;
-    }
-  }
+// layout/_grid.scss
+.main {
+  flex: 1;
+}

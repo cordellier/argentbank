@@ -5,6 +5,8 @@ import { loginSuccess, loginFail } from '../store/authSlice';
 import { setUserProfile } from '../store/userSlice';
 import { login, getUserProfile } from '../services/api';
 import { isValidEmail, isValidPassword } from '../utils/regex';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -32,11 +34,9 @@ const Login = () => {
       const loginData = await login(email, password);
       dispatch(loginSuccess(loginData.body.token));
 
-      // Fetch user profile immediately after successful login
       const profileData = await getUserProfile(loginData.body.token);
       dispatch(setUserProfile(profileData.body));
 
-      // If "Remember me" is checked, you could save the token in localStorage here
       if (rememberMe) {
         localStorage.setItem('token', loginData.body.token);
       }
@@ -51,15 +51,15 @@ const Login = () => {
   return (
     <main className="main bg-dark">
       <section className="sign-in-content">
-        <i className="fa fa-user-circle sign-in-icon"></i>
+        <FontAwesomeIcon icon={faUserCircle} className="sign-in-icon" />
         <h1>Sign In</h1>
         {error && <p className="error-message">{error}</p>}
         <form onSubmit={handleSubmit}>
           <div className="input-wrapper">
-            <label htmlFor="email">Email</label>
+            <label htmlFor="username">Username</label>
             <input
-              type="email"
-              id="email"
+              type="text"
+              id="username"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
